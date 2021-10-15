@@ -7,6 +7,8 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { Provider } from "react-redux";
 import SignIn from "./views/signin/index";
 import Signup from "./views/signup/index";
+import { MuiThemeProvider, createTheme } from "@material-ui/core/styles";
+import { pink, teal, yellow, blueGrey, red, deepOrange } from "@material-ui/core/colors";
 
 const test = () => {
   return (
@@ -23,19 +25,28 @@ function App() {
     });
   }, []);
 
+  const theme = createTheme({
+    palette: {
+      primary: blueGrey,
+      secondary: yellow,
+    },
+  });
+
   return (
     <>
-      <Provider store={store}>
-        <Router>
-          <Navbar />
-          <CssBaseline />
-          <Switch>
-            <Route exact path="/" component={test} />
-            <Route exact path="/signin" component={SignIn} />
-            <Route exact path="/signup" component={Signup} />
-          </Switch>
-        </Router>
-      </Provider>
+      <MuiThemeProvider theme={theme}>
+        <Provider store={store}>
+          <Router>
+            <Navbar />
+            <CssBaseline />
+            <Switch>
+              <Route exact path="/" component={test} />
+              <Route exact path="/signin" component={SignIn} />
+              <Route exact path="/signup" component={Signup} />
+            </Switch>
+          </Router>
+        </Provider>
+      </MuiThemeProvider>
     </>
   );
 }
