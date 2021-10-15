@@ -3,3 +3,7 @@ export const checkLocalStorage = (key: "authorization" | "id" | "email") => {
     return true;
   } else return false;
 };
+
+export const isValidEmail = (email: string) => {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+};

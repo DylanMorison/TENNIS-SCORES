@@ -1,0 +1,30 @@
+import { TextField } from "@material-ui/core";
+import React from "react";
+
+interface EmailFieldProps {
+  email: string;
+  setEmail: React.Dispatch<React.SetStateAction<string>>;
+  emailError: boolean;
+}
+
+export const EmailTextField = ({ email, setEmail, emailError }: EmailFieldProps) => {
+  return (
+    <>
+      <TextField
+        variant="outlined"
+        margin="normal"
+        required
+        fullWidth
+        id="email"
+        label="Email Address"
+        name="email"
+        autoComplete="email"
+        autoFocus
+        error={emailError ? true : false}
+        helperText={emailError ? "invalid email" : ""}
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+    </>
+  );
+};

@@ -3,6 +3,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
+import { Link as RouterLink } from "react-router-dom";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
@@ -44,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignUp() {
+const SignUp = () => {
   const classes = useStyles();
 
   return (
@@ -67,6 +68,7 @@ export default function SignUp() {
                 id="email"
                 label="Email Address"
                 name="email"
+                autoFocus
                 autoComplete="email"
               />
             </Grid>
@@ -92,11 +94,11 @@ export default function SignUp() {
           >
             Sign Up
           </Button>
-          <Grid container justifyContent="flex-end">
+          <Grid container>
             <Grid item>
-              <Link href="#" variant="body2">
-                Already have an account? Sign in
-              </Link>
+              <RouterLink style={{ textDecoration: "none", color: "black" }} to="/signin">
+                Don't have an account yet? Sign Up
+              </RouterLink>
             </Grid>
           </Grid>
         </form>
@@ -106,4 +108,6 @@ export default function SignUp() {
       </Box>
     </Container>
   );
-}
+};
+
+export default SignUp;

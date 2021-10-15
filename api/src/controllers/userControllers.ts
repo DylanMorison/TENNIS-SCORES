@@ -17,20 +17,25 @@ const getUser = async (req: ProtectedRequest, res: Response) => {
 };
 
 const signin = async (req: Request, res: Response) => {
+  console.log(req.body);
+
   const { email, password } = req.body;
   if (!email || !password) {
     res.status(422).send({ error: true, message: "missing email and/or password" });
+    return;
   }
 
   try {
     let user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({ error: true, message: "Invalid Credentials" });
+      return;
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(400).json({ error: true, message: "Invalid Credentials" });
+      return;
     }
 
     const payload = {

@@ -13,6 +13,6 @@ app.get("/test", (req, res) => {
   res.send('hello world!')
 });
 
-app.use("/api/users", userRouter);
+app.use("/users", userRouter);
 
 export { app };
