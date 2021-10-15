@@ -2,7 +2,7 @@ import { model } from "mongoose";
 import jwt from "jsonwebtoken";
 import { Request, Response } from "express";
 import { User } from "../models/User";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { ProtectedRequest } from "../ts/types";
 
 const getUser = async (req: ProtectedRequest, res: Response) => {
