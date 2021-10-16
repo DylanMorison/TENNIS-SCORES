@@ -88,13 +88,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const initDate = () => {
+  const date = new Date();
+  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate() - 1}`;
+};
+
 const LiveScores = () => {
   const theme = useTheme();
   const classes = useStyles();
   const dispatch = useAppDispatch();
   const Tennis = useAppSelector((state) => state.Tennis);
   const User = useAppSelector((state) => state.User);
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState(initDate());
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -102,8 +107,8 @@ const LiveScores = () => {
   };
 
   useEffect(() => {
-    dispatch(getTennisMatchesByDate("20211015"));
-  }, [dispatch]);
+    dispatch(getTennisMatchesByDate(date));
+  }, []);
 
   const renderTennisMatches = () => {
     if (!Tennis.matchesByDate) {
@@ -200,7 +205,6 @@ const LiveScores = () => {
           id="date"
           label="Date"
           type="date"
-          defaultValue="2021-05-24"
           value={date}
           className={classes.textField}
           onChange={(e) => {
