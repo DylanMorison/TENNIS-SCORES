@@ -9,6 +9,6 @@ const tennisRouter = express.Router();
  * @desc   Get Matches By Date
  **@access Protected
  */
-tennisRouter.get("/matches-by-date", requireAuth, tennisControllers.getMatchesByDate);
+tennisRouter.get("/matches-by-date/:Date", requireAuth, tennisControllers.getMatchesByDate);
 
 export { tennisRouter };

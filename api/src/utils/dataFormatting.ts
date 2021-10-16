@@ -13,19 +13,22 @@ type formattedEventType = {
   results: resultsType;
 };
 
-type formattedData = {
+type formattedStageType = {
   Sid: string;
   tournamentTitle: string;
   tournamentType: string;
   events: formattedEventType[];
 };
 
+type formattedTennisApiResponseType = {
+  stages: formattedStageType[];
+};
+
 const formatTennisApiResponse = (tennisApiResponse: tennisApiResponseType) => {
-  const formattedData = {} as formattedData;
+  const formattedTennisApiResponse = [];
 
-  const { Stages } = tennisApiResponse;
-
-  for (let stage of Stages) {
+  for (let stage of tennisApiResponse.Stages) {
+    const formattedData = {} as formattedStageType;
     formattedData.Sid = stage.Sid;
     formattedData.tournamentTitle = stage.Snm;
     formattedData.tournamentType = stage.Cnm;
@@ -61,8 +64,10 @@ const formatTennisApiResponse = (tennisApiResponse: tennisApiResponseType) => {
     }
 
     formattedData.events = events;
-    return formattedData;
+    formattedTennisApiResponse.push(formattedData);
   }
+
+  return formattedTennisApiResponse;
 };
 
 const createScoreStr = (event: Event, player1Won: boolean) => {

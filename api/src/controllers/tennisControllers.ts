@@ -5,7 +5,7 @@ import { formatTennisApiResponse } from "../utils/dataFormatting";
 
 const getMatchesByDate = async (req: ProtectedRequest, res: Response) => {
   try {
-    const { Date } = req.body;
+    const { Date } = req.params;
     const config = {
       headers: {
         "x-rapidapi-host": process.env.X_RapidAPI_Host,
@@ -24,7 +24,12 @@ const getMatchesByDate = async (req: ProtectedRequest, res: Response) => {
     res.status(200).send(formattedResults);
   } catch (err: any) {
     console.log(err.message);
-    res.status(500).send(err.message);
+    res
+      .status(500)
+      .send({
+        error: true,
+        message: err.message || "Error fetching tennis matches by date",
+      });
   }
 };
 

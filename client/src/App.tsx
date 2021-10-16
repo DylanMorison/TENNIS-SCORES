@@ -15,22 +15,14 @@ import LiveScores from "./views/scores/index";
 import RequireAuth from "./utils/RequireAuth";
 import { useAppSelector } from "./redux/hooks";
 import { LinearProgress } from "@material-ui/core";
-
-const test = () => {
-  return (
-    <div>
-      <h2>test</h2>
-    </div>
-  );
-};
+import { useAppDispatch } from "./redux/hooks";
+import { getTennisMatchesByDate } from "./redux/slices/Tennis/tennisThunk";
 
 const App = () => {
   const User = useAppSelector((state) => state.User);
-
+  const dispatch = useAppDispatch();
   useEffect(() => {
-    axios.get("/api/test").then((res) => {
-      console.log({ res });
-    });
+    dispatch(getTennisMatchesByDate("20211015"));
   }, []);
 
   useEffect(() => {
