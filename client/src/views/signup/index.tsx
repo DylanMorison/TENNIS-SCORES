@@ -61,7 +61,7 @@ const SignUp = () => {
   const classes = useStyles();
 
   if (isAuthenticated) {
-    return <Redirect to="/livescores" />;
+    return <Redirect to="/" />;
   }
 
   return (

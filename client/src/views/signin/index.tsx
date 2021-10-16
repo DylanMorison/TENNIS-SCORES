@@ -61,7 +61,7 @@ const SignIn = () => {
   const [emailError, setEmailError] = useState(false);
 
   if (isAuthenticated) {
-    return <Redirect to="/livescores" />;
+    return <Redirect to="/" />;
   }
   
   return (

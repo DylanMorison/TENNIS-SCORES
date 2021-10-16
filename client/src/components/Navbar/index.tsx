@@ -65,8 +65,8 @@ const useStyles = makeStyles((theme: Theme) =>
       marginLeft: "auto",
     },
     orange: {
-      color: theme.palette.getContrastText(yellow[500]),
-      backgroundColor: yellow[500],
+      // color: theme.palette.getContrastText(yellow[500]),
+      backgroundColor: '#FFFFFF'
     },
   })
 );

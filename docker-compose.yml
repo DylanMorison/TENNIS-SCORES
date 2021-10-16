@@ -24,4 +24,4 @@ services:
     container_name: api
     volumes:
       - /app/node_modules
-      - ./api:/app
+      - ./api:/usr/app

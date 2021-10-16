@@ -11,7 +11,7 @@ import { MuiThemeProvider, createTheme, makeStyles } from "@material-ui/core/sty
 import { pink, teal, yellow, blueGrey, red, deepOrange } from "@material-ui/core/colors";
 import unauthorized from "./views/unauthorized";
 import NotFound from "./views/404/index";
-import LiveScores from "./views/scores/index";
+import LiveScores from "./views/tournaments/index";
 import RequireAuth from "./utils/RequireAuth";
 import { useAppSelector } from "./redux/hooks";
 import { LinearProgress } from "@material-ui/core";
@@ -33,7 +33,7 @@ const App = () => {
   const theme = createTheme({
     palette: {
       primary: blueGrey,
-      secondary: yellow,
+      secondary: teal,
     },
   });
 

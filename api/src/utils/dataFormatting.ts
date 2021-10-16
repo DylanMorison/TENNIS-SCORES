@@ -50,13 +50,13 @@ const formatTennisApiResponse = (tennisApiResponse: tennisApiResponseType) => {
 
       if (event.Tr1 === "3") {
         results.winner = formattedEvent.player1Name;
-        results.score = createScoreStr(event, true);
+        results.score = createScoreStr(event, true, formattedEvent);
       } else if ((event.Tr1 === "2" && event.Tr2 === "0") || event.Tr2 === "1") {
         results.winner = formattedEvent.player1Name;
-        results.score = createScoreStr(event, true);
+        results.score = createScoreStr(event, true, formattedEvent);
       } else {
         results.winner = formattedEvent.player2Name;
-        results.score = createScoreStr(event, false);
+        results.score = createScoreStr(event, false, formattedEvent);
       }
 
       formattedEvent.results = results;
@@ -70,20 +70,34 @@ const formatTennisApiResponse = (tennisApiResponse: tennisApiResponseType) => {
   return formattedTennisApiResponse;
 };
 
-const createScoreStr = (event: Event, player1Won: boolean) => {
+const createScoreStr = (
+  event: Event,
+  player1Won: boolean,
+  formattedEvent: formattedEventType
+) => {
+  const { player1Name, player2Name } = formattedEvent;
+  let scoreStr;
   if (player1Won) {
-    return `${event.Tr1S1 || "0"}-${event.Tr2S1 || "0"} ${event.Tr1S2 || "0"}-${
-      event.Tr2S2 || "0"
-    } ${event.Tr1S3 || "0"}-${event.Tr2S3 || "0"} ${event.Tr1S4 || "0"}-${
-      event.Tr2S4 || "0"
-    } ${event.Tr1S5 || "0"}-${event.Tr2S5 || "0"}`;
+    scoreStr = `${player1Name} d. ${player2Name}\n${event.Tr1S1 || "??"}-${
+      event.Tr2S1 || "??"
+    } ${event.Tr1S2 || "??"}-${event.Tr2S2 || "??"} ${event.Tr1S3 || "??"}-${
+      event.Tr2S3 || "??"
+    } ${event.Tr1S4 || "??"}-${event.Tr2S4 || "??"} ${event.Tr1S5 || "??"}-${
+      event.Tr2S5 || "??"
+    }`;
   } else {
-    return `${event.Tr2S1 || "0"}-${event.Tr1S1 || "0"} ${event.Tr2S2 || "0"}-${
-      event.Tr1S2 || "0"
-    } ${event.Tr2S3 || "0"}-${event.Tr1S3 || "0"} ${event.Tr2S4 || "0"}-${
-      event.Tr1S4 || "0"
-    } ${event.Tr2S5 || "0"}-${event.Tr1S5 || "0"}`;
+    scoreStr = `${player2Name} d. ${player1Name}\n${event.Tr2S1 || "??"}-${
+      event.Tr1S1 || "??"
+    } ${event.Tr2S2 || "??"}-${event.Tr1S2 || "??"} ${event.Tr2S3 || "??"}-${
+      event.Tr1S3 || "??"
+    } ${event.Tr2S4 || "??"}-${event.Tr1S4 || "??"} ${event.Tr2S5 || "??"}-${
+      event.Tr1S5 || "??"
+    }`;
   }
+  while (scoreStr.includes("??-??")) {
+    scoreStr = scoreStr.replace("??-??", "");
+  }
+  return scoreStr.trim();
 };
 
 export { formatTennisApiResponse };
