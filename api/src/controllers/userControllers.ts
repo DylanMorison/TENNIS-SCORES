@@ -1,4 +1,3 @@
-import { model } from "mongoose";
 import jwt from "jsonwebtoken";
 import { Request, Response } from "express";
 import { User } from "../models/User";
