@@ -7,7 +7,6 @@ import { ProtectedRequest } from "../ts/types";
 const getUser = async (req: ProtectedRequest, res: Response) => {
   try {
     const user = await User.findById(req.user.id).select("-password");
-    debugger;
     res.status(200).json({ user });
   } catch (err: any) {
     console.log(err.message);

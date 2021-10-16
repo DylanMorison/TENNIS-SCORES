@@ -1,6 +1,5 @@
 export const checkLocalStorage = () => {
   if (localStorage.getItem("authorization") && localStorage.getItem("email")) {
-    debugger;
     return true;
   } else {
     localStorage.removeItem("authorization")

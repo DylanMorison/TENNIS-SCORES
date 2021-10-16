@@ -16,20 +16,19 @@ import RequireAuth from "./utils/RequireAuth";
 import { useAppSelector } from "./redux/hooks";
 import { LinearProgress } from "@material-ui/core";
 import { useAppDispatch } from "./redux/hooks";
-import { getTennisMatchesByDate } from "./redux/slices/Tennis/tennisThunk";
 
 const App = () => {
   const User = useAppSelector((state) => state.User);
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(getTennisMatchesByDate("20211015"));
-  }, []);
+  const Tennis = useAppSelector((state) => state.Tennis);
 
   useEffect(() => {
     if (!!User.error) {
       alert(User.error);
     }
-  }, [User.error]);
+    if (!!Tennis.error) {
+      alert(Tennis.error);
+    }
+  }, [User.error, Tennis.error]);
 
   const theme = createTheme({
     palette: {
@@ -43,17 +42,17 @@ const App = () => {
       <MuiThemeProvider theme={theme}>
         <Router>
           <Navbar />
-          {User.loading ? (
+          {User.loading || Tennis.loading ? (
             <LinearProgress color="secondary" />
           ) : (
-            <LinearProgress color="secondary" variant="determinate" value={0} />
+            <LinearProgress color="secondary" variant="determinate" value={100} />
           )}
           <CssBaseline />
           <Switch>
             <Route exact path="/" component={LiveScores} />
             <Route exact path="/signin" component={SignIn} />
             <Route exact path="/signup" component={Signup} />
-            <RequireAuth exact path="/livescores" component={LiveScores} />
+            {/* <RequireAuth exact path="/livescores" component={LiveScores} /> */}
             <div
               style={{
                 display: "flex",

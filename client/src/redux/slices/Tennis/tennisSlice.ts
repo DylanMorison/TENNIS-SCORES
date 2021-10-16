@@ -1,28 +1,35 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { formattedStagesType, tennisMatchesByDateFailure } from "./tennisTypes";
+import { formattedStageType, tennisMatchesByDateFailure } from "./tennisTypes";
 
 type tennisSliceType = {
   error: string | null;
   loading: boolean;
-  stages: formattedStagesType | null;
+  matchesByDate: formattedStageType[] | null;
 };
 
 const tennisSlice = createSlice({
   name: "Tennis",
   initialState: {
     loading: false,
-    stages: null,
+    matchesByDate: null,
     error: null,
   } as tennisSliceType,
   reducers: {
-    getTennisMatchesByDateSuccess(state, action: PayloadAction<formattedStagesType>) {
-      state.stages = action.payload;
+    getTennisMatchesByDateLoading(state) {
+      state.loading = true;
+      state.error = null;
+    },
+    getTennisMatchesByDateSuccess(state, action: PayloadAction<formattedStageType[]>) {
+      state.matchesByDate = action.payload;
+      state.error = null;
+      state.loading = false;
     },
     getTennisMatchesByDateFailure(
       state,
       action: PayloadAction<tennisMatchesByDateFailure>
     ) {
       state.error = action.payload.error;
+      state.loading = false;
     },
   },
 });

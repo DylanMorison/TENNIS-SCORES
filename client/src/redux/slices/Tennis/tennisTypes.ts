@@ -11,21 +11,18 @@ type formattedEventType = {
   results: resultsType;
 };
 
-type formattedStageType = {
+export type formattedStageType = {
   Sid: string;
   tournamentTitle: string;
   tournamentType: string;
   events: formattedEventType[];
 };
 
-export type formattedStagesType = {
-  stages: formattedStageType[];
-};
 
 export type tennisSliceType = {
   error: string | null;
   loading: boolean;
-  stages: formattedStagesType | null;
+  matchesByDate: formattedStageType[] | null;
 };
 
 export type tennisMatchesByDateFailure = {

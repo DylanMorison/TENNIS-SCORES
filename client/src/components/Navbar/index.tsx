@@ -90,7 +90,7 @@ const Navbar = () => {
       <AppBar position="static">
         <Toolbar>
           <Link
-            to={`${User.isAuthenticated ? "/livescores" : "/login"}`}
+            to={`${User.isAuthenticated ? "/" : "/login"}`}
             style={{ textDecoration: "none" }}
           >
             <LogoButton
