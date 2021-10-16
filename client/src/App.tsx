@@ -58,7 +58,7 @@ const App = () => {
           )}
           <CssBaseline />
           <Switch>
-            <Route exact path="/" component={test} />
+            <Route exact path="/" component={LiveScores} />
             <Route exact path="/signin" component={SignIn} />
             <Route exact path="/signup" component={Signup} />
             <RequireAuth exact path="/livescores" component={LiveScores} />

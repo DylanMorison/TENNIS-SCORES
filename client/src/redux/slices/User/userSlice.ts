@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios, { AxiosResponse } from "axios";
-import { checkLocalStorage } from "../../utils/index";
+import { checkLocalStorage } from "../../../utils/index";
 import { signinSuccessType, signinFailureType } from "./userTypes";
 
 type userSliceType = {

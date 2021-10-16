@@ -8,7 +8,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { useAppDispatch } from "../../redux/hooks";
-import { actions } from "../../redux/slices/userSlice";
+import { actions } from "../../redux/slices/User/userSlice";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
