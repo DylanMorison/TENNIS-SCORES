@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { createStyles, makeStyles, Theme, styled } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -18,7 +18,17 @@ import ButtonGroup from "@material-ui/core/ButtonGroup";
 import WhatshotIcon from "@material-ui/icons/Whatshot";
 import Brightness5Icon from "@material-ui/icons/Brightness5";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
-
+import PhoneIcon from "@material-ui/icons/Phone";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import PersonPinIcon from "@material-ui/icons/PersonPin";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import AccountDropdown from "../AccountDropdown/index";
+import Avatar from "@material-ui/core/Avatar";
+import { pink, teal, yellow, blueGrey, red, deepOrange } from "@material-ui/core/colors";
 
 const LogoButton = styled(Button)({
   border: 0,
@@ -54,32 +64,38 @@ const useStyles = makeStyles((theme: Theme) =>
     authButtons: {
       marginLeft: "auto",
     },
+    orange: {
+      color: theme.palette.getContrastText(yellow[500]),
+      backgroundColor: yellow[500],
+    },
   })
 );
 
 const Navbar = () => {
   const classes = useStyles();
   const theme = useTheme();
-  const location = useLocation();
-  const dispatch = useAppDispatch();
+  // const location = useLocation();
+  // const dispatch = useAppDispatch();
   const User = useAppSelector((state) => state.User);
 
-  const [value, setValue] = useState(0);
-  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-    setValue(newValue);
-  };
+  const [open, setOpen] = useState(false);
+  const anchorRef = useRef<HTMLButtonElement>(null);
 
-  const CustomAppBar = styled(AppBar)({
-    backgroundColor: theme.palette.background.paper,
-  });
+  const handleToggle = () => {
+    setOpen((prevOpen) => !prevOpen);
+  };
 
   return (
     <div className={classes.grow}>
       <AppBar position="static">
         <Toolbar>
-          <Link to={`${User.isAuthenticated ? "/" : "/"}`} style={{ textDecoration: "none" }}>
+          <Link
+            to={`${User.isAuthenticated ? "/livescores" : "/login"}`}
+            style={{ textDecoration: "none" }}
+          >
             <LogoButton
               disableFocusRipple
+              disableRipple
               startIcon={<LogoIcon />}
               className={classes.logoButtonHover}
             >
@@ -89,9 +105,36 @@ const Navbar = () => {
 
           <div className={classes.authButtons}>
             <ButtonGroup>
-              {User.isAuthenticated ? //   logout // <Button color="secondary" onClick={() => dispatch(actions.logout())}>
-              // </Button>
-              null : (
+              {User.isAuthenticated ? ( //   logout // <Button color="secondary" onClick={() => dispatch(actions.logout())}>
+                // </Button>
+                <ButtonGroup>
+                  <IconButton
+                    aria-label="account of current user"
+                    aria-controls={open ? "menu-list-grow" : undefined}
+                    aria-haspopup="true"
+                    color="inherit"
+                    ref={anchorRef}
+                    onClick={handleToggle}
+                  >
+                    {!!User.email ? (
+                      <>
+                        <Avatar className={classes.orange}>
+                          <Typography variant="h6" color="primary">
+                            {User.email[0].toUpperCase()}
+                          </Typography>
+                        </Avatar>
+                        <AccountDropdown
+                          anchorRef={anchorRef}
+                          open={open}
+                          setOpen={setOpen}
+                        />
+                      </>
+                    ) : (
+                      <AccountCircle />
+                    )}
+                  </IconButton>
+                </ButtonGroup>
+              ) : (
                 <ButtonGroup>
                   <Button component={Link} to="/signin" color="secondary">
                     login

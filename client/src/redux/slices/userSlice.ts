@@ -13,8 +13,8 @@ type userSliceType = {
 const userSlice = createSlice({
   name: "user",
   initialState: {
-    isAuthenticated: checkLocalStorage("authorization"),
-    email: checkLocalStorage("email") ? localStorage.getItem("email") : null,
+    isAuthenticated: checkLocalStorage(),
+    email: checkLocalStorage() ? localStorage.getItem("email") : null,
     error: null,
     loading: false,
   } as userSliceType,
@@ -30,19 +30,27 @@ const userSlice = createSlice({
       state.error = null;
       state.loading = false;
       localStorage.setItem("authorization", token);
+      localStorage.setItem("email", email);
     },
 
     signinUserFailure(state, action: PayloadAction<signinFailureType>) {
       const { error } = action.payload;
 
-      if (checkLocalStorage("authorization")) {
-        localStorage.removeItem("authorization");
-      }
+      localStorage.removeItem("authorization");
 
       state.isAuthenticated = false;
       state.email = null;
       state.loading = false;
       state.error = error;
+    },
+
+    signOutUser(state) {
+      localStorage.removeItem("email");
+      localStorage.removeItem("authorization");
+      state.isAuthenticated = false;
+      state.email = null;
+      state.loading = false;
+      state.error = null;
     },
   },
 });

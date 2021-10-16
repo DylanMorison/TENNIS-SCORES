@@ -16,7 +16,14 @@ export const signinUser =
 
       dispatch(signinUserSuccess({ email: res.data.email, token: res.data.token }));
     } catch (err: any) {
-      dispatch(signinUserFailure({ error: err.toString }));
+      let error;
+      debugger;
+      if (!!err.response.data.message) {
+        error = err.response.data.message;
+      } else {
+        error = err.message;
+      }
+      dispatch(signinUserFailure({ error }));
     }
   };
 
@@ -31,6 +38,6 @@ export const signupUser =
 
       dispatch(signinUserSuccess({ email: res.data.email, token: res.data.token }));
     } catch (err: any) {
-      dispatch(signinUserFailure({ error: err.toString }));
+      dispatch(signinUserFailure({ error: err.message }));
     }
   };
