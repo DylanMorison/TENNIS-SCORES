@@ -24,4 +24,10 @@ docker-compose up
 
 Open browser and navigate to http://localhost:10000/
 
+### Debugging 
+
+```
+docker-compose down -v
+``
+
 https://rapidapi.com/apidojo/api/livescore6/
