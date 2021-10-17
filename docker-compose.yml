@@ -11,9 +11,9 @@ services:
     build:
       context: ./client
       dockerfile: Dockerfile
-    volumes:
-      - /app/node_modules
-      - ./client:/app
+    # volumes:
+    #   - /app/node_modules
+    #   - ./client:/app
     restart: on-failure
     container_name: client
   api:
@@ -22,6 +22,6 @@ services:
       dockerfile: Dockerfile
     restart: on-failure
     container_name: api
-    volumes:
-      - /app/node_modules
-      - ./api:/usr/app
+    # volumes:
+    #   - /app/node_modules
+    #   - ./api:/usr/app
