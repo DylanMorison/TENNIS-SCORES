@@ -2,6 +2,7 @@
 
 ### Requirements 
 - git
+- node & npm
 - Docker
 - Docker Compose
 - `.env` file
@@ -12,9 +13,16 @@
 git clone git@github.com:DylanMorison/TENNIS-SCORES.git
 ```
 - Place .env file in `./api directory`
-- cd to root of project
+
+- install node modules in api directory
+```
+cd api/
+npm install
+```
+
 - build Docker images with docker-compose
 ```bash
+cd ..
 docker-compose build
 ```
 - start up all docker containeirs for dev 
