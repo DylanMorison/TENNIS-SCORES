@@ -14,12 +14,6 @@ git clone git@github.com:DylanMorison/TENNIS-SCORES.git
 ```
 - Place .env file in `./api directory`
 
-- install node modules in api directory
-```
-cd api/
-npm install
-```
-
 - build Docker images with docker-compose
 ```bash
 cd ..
