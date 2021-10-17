@@ -11,7 +11,7 @@
 #clone repo
 git clone git@github.com:DylanMorison/TENNIS-SCORES.git
 
-#Place .env file in `./api/.env`
+#Place .env file in `./api directory`
 
 #cd to root of project
 docker-compose build
