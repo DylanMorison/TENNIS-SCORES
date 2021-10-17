@@ -13,7 +13,7 @@ git clone git@github.com:DylanMorison/TENNIS-SCORES.git
 
 #Place .env file in `./api/.env`
 
-#cd to root of project, i.e. dir where docker-compose.yml lives
+#cd to root of project
 docker-compose build
 docker-compose up 
 ```
