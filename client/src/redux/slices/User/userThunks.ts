@@ -28,10 +28,10 @@ const signinUser = (email: string, password: string) => async (dispatch: Dispatc
 const signupUser = (email: string, password: string) => async (dispatch: Dispatch) => {
   try {
     dispatch(signinUserLoading());
-    const res = await axios.post<signinSuccessType>(
-      "/api/users/signup",
-      JSON.stringify({ email, password })
-    );
+    const res = await axios.post<signinSuccessType>("/api/users/signup", {
+      email,
+      password,
+    });
 
     dispatch(signinUserSuccess({ email: res.data.email, token: res.data.token }));
   } catch (err: any) {

@@ -17,8 +17,9 @@ const getUser = async (req: ProtectedRequest, res: Response) => {
 const signin = async (req: Request, res: Response) => {
   const { email, password } = req.body;
   if (!email || !password) {
-    res.status(422).send({ error: true, message: "missing email and/or password" });
-    return;
+    return res
+      .status(422)
+      .send({ error: true, message: "missing email and/or password" });
   }
 
   try {
@@ -54,7 +55,9 @@ const signup = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    res.status(422).send({ error: true, message: "missing email and/or password" });
+    return res
+      .status(422)
+      .send({ error: true, message: "missing email and/or password" });
   }
 
   try {
@@ -82,7 +85,7 @@ const signup = async (req: Request, res: Response) => {
 
     jwt.sign(payload, JWT_SECRET, { expiresIn: 360000 }, (err, token) => {
       if (err) throw err;
-      res.status(200).json({ token, email });
+      return res.status(200).json({ token, email });
     });
   } catch (error: any) {
     console.log(error.message);

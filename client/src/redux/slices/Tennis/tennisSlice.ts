@@ -31,6 +31,12 @@ const tennisSlice = createSlice({
       state.error = action.payload.error;
       state.loading = false;
     },
+
+    resetTennisMatchesByDate(state) {
+      state.error = null;
+      state.loading = false;
+      state.matchesByDate = null;
+    },
   },
 });
 

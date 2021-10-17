@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -13,11 +13,12 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { signinUser } from "../../redux/slices/User/userThunks";
+import { signupUser } from "../../redux/slices/User/userThunks";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { EmailTextField } from "../../components/AuthFields/EmailTextField";
 import { PasswordTextField } from "../../components/AuthFields/PasswordTextField";
 import { isValidEmail } from "../../utils/index";
+import { actions } from "../../redux/slices/Tennis/tennisSlice";
 
 function Copyright() {
   return (
@@ -57,8 +58,13 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState(false);
-
+  const { resetTennisMatchesByDate } = actions;
   const classes = useStyles();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(resetTennisMatchesByDate());
+  }, []);
 
   if (isAuthenticated) {
     return <Redirect to="/tournaments" />;
@@ -83,6 +89,15 @@ const SignUp = () => {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={(e) => {
+              e.preventDefault();
+              if (!isValidEmail(email)) {
+                setEmailError(true);
+              } else {
+                setEmailError(false);
+                dispatch(signupUser(email, password));
+              }
+            }}
           >
             Sign Up
           </Button>

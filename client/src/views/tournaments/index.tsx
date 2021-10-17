@@ -99,7 +99,7 @@ const LiveScores = () => {
   const dispatch = useAppDispatch();
   const Tennis = useAppSelector((state) => state.Tennis);
   const User = useAppSelector((state) => state.User);
-  const [date, setDate] = useState('');
+  const [date, setDate] = useState('20211015');
   const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
@@ -221,7 +221,6 @@ const LiveScores = () => {
       <Fab
         className={classes.DateFAB}
         onClick={() => {
-          debugger;
           if (!date) {
             alert("please select a valid date");
             return;

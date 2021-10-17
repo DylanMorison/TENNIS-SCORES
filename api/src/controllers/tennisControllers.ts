@@ -21,7 +21,7 @@ const getMatchesByDate = async (req: ProtectedRequest, res: Response) => {
 
     const formattedResults = formatTennisApiResponse(tennisApiResponse.data);
 
-    res.status(200).send(formattedResults);
+    return res.status(200).send(formattedResults);
   } catch (err: any) {
     console.log(err.message);
     res

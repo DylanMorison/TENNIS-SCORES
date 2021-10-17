@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -18,6 +18,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { EmailTextField } from "../../components/AuthFields/EmailTextField";
 import { PasswordTextField } from "../../components/AuthFields/PasswordTextField";
 import { isValidEmail } from "../../utils/index";
+import { actions } from "../../redux/slices/Tennis/tennisSlice";
 
 function Copyright() {
   return (
@@ -55,15 +56,20 @@ const SignIn = () => {
   const isAuthenticated = useAppSelector((state) => state.User.isAuthenticated);
   const classes = useStyles();
   const dispatch = useAppDispatch();
+  const { resetTennisMatchesByDate } = actions;
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState(false);
 
+  useEffect(() => {
+    dispatch(resetTennisMatchesByDate());
+  }, []);
+
   if (isAuthenticated) {
     return <Redirect to="/tournaments" />;
   }
-  
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
