@@ -1,10 +1,10 @@
 # TENNIS-SCORES
 
 ### Requirements 
-- git (for cloning repo)
+- git
 - Docker
 - Docker Compose
-- `.env` file located in `./api/.env`
+- `.env` file
 
 ### Start up Development
 ```
