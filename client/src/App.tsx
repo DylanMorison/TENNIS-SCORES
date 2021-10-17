@@ -25,10 +25,10 @@ const App = () => {
     if (!!User.error) {
       alert(User.error);
     }
-    if (!!Tennis.error) {
-      alert(Tennis.error);
-    }
-  }, [User.error, Tennis.error]);
+    // if (!!Tennis.error) {
+    //   alert(Tennis.error);
+    // }
+  }, [User.error]);
 
   const theme = createTheme({
     palette: {
@@ -49,9 +49,10 @@ const App = () => {
           )}
           <CssBaseline />
           <Switch>
-            <Route exact path="/" component={LiveScores} />
+            <Route exact path="/"/>
             <Route exact path="/signin" component={SignIn} />
             <Route exact path="/signup" component={Signup} />
+            <Route exact path="/tournaments" component={LiveScores} />
             {/* <RequireAuth exact path="/livescores" component={LiveScores} /> */}
             <div
               style={{

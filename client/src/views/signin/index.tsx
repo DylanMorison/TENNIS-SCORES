@@ -61,7 +61,7 @@ const SignIn = () => {
   const [emailError, setEmailError] = useState(false);
 
   if (isAuthenticated) {
-    return <Redirect to="/" />;
+    return <Redirect to="/tournaments" />;
   }
   
   return (

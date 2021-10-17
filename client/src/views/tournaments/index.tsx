@@ -99,8 +99,8 @@ const LiveScores = () => {
   const dispatch = useAppDispatch();
   const Tennis = useAppSelector((state) => state.Tennis);
   const User = useAppSelector((state) => state.User);
-  const [date, setDate] = useState(initDate());
-  const [expanded, setExpanded] = React.useState(false);
+  const [date, setDate] = useState('');
+  const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -118,7 +118,7 @@ const LiveScores = () => {
     if (!User.isAuthenticated) {
       return <Redirect to="/signin" />;
     }
-
+ 
     return Tennis.matchesByDate.map(
       ({ Sid, tournamentTitle, tournamentType, events }, index) => (
         <>
@@ -226,7 +226,7 @@ const LiveScores = () => {
             alert("please select a valid date");
             return;
           }
-          dispatch(getTennisMatchesByDate(date.trim().replace("-", "")));
+          dispatch(getTennisMatchesByDate(date.trim().replaceAll("-", "")));
         }}
       >
         <RefreshIcon />

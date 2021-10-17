@@ -61,7 +61,7 @@ const SignUp = () => {
   const classes = useStyles();
 
   if (isAuthenticated) {
-    return <Redirect to="/" />;
+    return <Redirect to="/tournaments" />;
   }
 
   return (
