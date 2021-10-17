@@ -6,20 +6,18 @@
 - Docker Compose
 - `.env` file
 
-### Start up Development
+### Development
 ```bash
-#clone repo
+- clone repo
 git clone git@github.com:DylanMorison/TENNIS-SCORES.git
 ```
-#Place .env file in `./api directory`
-
-#cd to root of project
-
-#build Docker images with docker-compose
+- Place .env file in `./api directory`
+- cd to root of project
+- build Docker images with docker-compose
 ```bash
 docker-compose build
 ```
-#start up all docker containeirs for dev 
+- start up all docker containeirs for dev 
 ```bash
 docker-compose up 
 ```
