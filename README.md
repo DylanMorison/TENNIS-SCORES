@@ -8,8 +8,8 @@
 - `.env` file
 
 ### Development
-```bash
 - clone repo
+```bash
 git clone git@github.com:DylanMorison/TENNIS-SCORES.git
 ```
 - Place .env file in `./api directory`

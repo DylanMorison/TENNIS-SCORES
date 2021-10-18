@@ -16,6 +16,7 @@ import RequireAuth from "./utils/RequireAuth";
 import { useAppSelector } from "./redux/hooks";
 import { LinearProgress } from "@material-ui/core";
 import { useAppDispatch } from "./redux/hooks";
+import TournamentDetail from "./views/tournamentDetail/index";
 
 const App = () => {
   const User = useAppSelector((state) => state.User);
@@ -25,9 +26,6 @@ const App = () => {
     if (!!User.error) {
       alert(User.error);
     }
-    // if (!!Tennis.error) {
-    //   alert(Tennis.error);
-    // }
   }, [User.error]);
 
   const theme = createTheme({
@@ -35,6 +33,7 @@ const App = () => {
       primary: blueGrey,
       secondary: teal,
     },
+    typography: {},
   });
 
   return (
@@ -49,10 +48,11 @@ const App = () => {
           )}
           <CssBaseline />
           <Switch>
-            <Route exact path="/"/>
+            <Route exact path="/" />
             <Route exact path="/signin" component={SignIn} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/tournaments" component={LiveScores} />
+            <Route exact path="/tournaments/:Sid" component={TournamentDetail} />
             {/* <RequireAuth exact path="/livescores" component={LiveScores} /> */}
             <div
               style={{

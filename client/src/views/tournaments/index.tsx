@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Redirect } from "react-router";
+import { Redirect, Link } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import { getTennisMatchesByDate } from "../../redux/slices/Tennis/tennisThunk";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
@@ -99,7 +99,7 @@ const LiveScores = () => {
   const dispatch = useAppDispatch();
   const Tennis = useAppSelector((state) => state.Tennis);
   const User = useAppSelector((state) => state.User);
-  const [date, setDate] = useState('20211015');
+  const [date, setDate] = useState(initDate());
   const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
@@ -118,30 +118,32 @@ const LiveScores = () => {
     if (!User.isAuthenticated) {
       return <Redirect to="/signin" />;
     }
- 
+
     return Tennis.matchesByDate.map(
       ({ Sid, tournamentTitle, tournamentType, events }, index) => (
         <>
           <Grid md={4} sm={6} xs={12} key={index} item>
             <Card variant="outlined" key={index * 100} className={classes.Card}>
-              <CardActionArea style={{ height: "140px" }}>
-                <CardContent>
-                  <Button
-                    fullWidth
-                    variant="text"
-                    size="large"
-                    style={{ textTransform: "none", color: "black" }}
-                    disableRipple
-                    disableFocusRipple
-                    disabled
-                  >
-                    {tournamentTitle}
-                  </Button>
-                  <Typography variant="body2" color="textSecondary" component="p">
-                    {tournamentType}
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
+              <Link to={`tournaments/${Sid}`} style={{ textDecoration: "none"}}>
+                <CardActionArea style={{ height: "140px" }}>
+                  <CardContent>
+                    <Button
+                      fullWidth
+                      variant="text"
+                      size="large"
+                      style={{ textTransform: "none", color: "black" }}
+                      disableRipple
+                      disableFocusRipple
+                      disabled
+                    >
+                      {tournamentTitle}
+                    </Button>
+                    <Typography variant="body2" color="textSecondary" component="p">
+                      {tournamentType}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Link>
               <CardActions className={classes.CardActions}>
                 <Typography
                   variant="body2"
