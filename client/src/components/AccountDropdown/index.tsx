@@ -9,10 +9,13 @@ import MenuList from "@material-ui/core/MenuList";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { useAppDispatch } from "../../redux/hooks";
 import { actions } from "../../redux/slices/User/userSlice";
+import "./index.css"
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       display: "flex",
+      zIndex: "auto",
     },
     paper: {
       marginRight: theme.spacing(2),
@@ -66,7 +69,7 @@ export default function MenuListComposition(props: MenuListCompositionProps) {
   }, [open]);
 
   return (
-    <div className={classes.root}>
+    <div className={`${classes.root} z`}>
       <div>
         <Popper
           open={open}
