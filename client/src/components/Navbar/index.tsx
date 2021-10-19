@@ -29,7 +29,7 @@ import Select from "@material-ui/core/Select";
 import AccountDropdown from "../AccountDropdown/index";
 import Avatar from "@material-ui/core/Avatar";
 import { pink, teal, yellow, blueGrey, red, deepOrange } from "@material-ui/core/colors";
-
+import SportsTennisIcon from "@material-ui/icons/SportsTennis";
 const LogoButton = styled(Button)({
   border: 0,
   borderRadius: 3,
@@ -64,9 +64,14 @@ const useStyles = makeStyles((theme: Theme) =>
     authButtons: {
       marginLeft: "auto",
     },
-    orange: {
+    avatar: {
       // color: theme.palette.getContrastText(yellow[500]),
-      backgroundColor: '#FFFFFF'
+      backgroundColor: "#FFFFFF",
+    },
+    test: {
+      "&:hover": {
+        color: "red",
+      },
     },
   })
 );
@@ -90,16 +95,17 @@ const Navbar = () => {
       <AppBar position="static">
         <Toolbar>
           <Link
-            to={`${User.isAuthenticated ? "/tournaments" : "/signin"}`}
+            // to={`${User.isAuthenticated ? "/" : "/signin"}`}
+            to="/"
             style={{ textDecoration: "none" }}
           >
             <LogoButton
               disableFocusRipple
               disableRipple
-              startIcon={<LogoIcon />}
+              startIcon={<SportsTennisIcon />}
               className={classes.logoButtonHover}
             >
-              <Typography variant="h6">TENNIS SCORES</Typography>
+              <Typography variant="h6">TENNISCORES</Typography>
             </LogoButton>
           </Link>
 
@@ -115,10 +121,13 @@ const Navbar = () => {
                     color="inherit"
                     ref={anchorRef}
                     onClick={handleToggle}
+                    disableFocusRipple
+                    disableTouchRipple
+                    className={classes.test}
                   >
                     {!!User.email ? (
                       <>
-                        <Avatar className={classes.orange}>
+                        <Avatar className={classes.avatar} variant="rounded">
                           <Typography variant="h6" color="primary">
                             {User.email[0].toUpperCase()}
                           </Typography>
@@ -135,11 +144,21 @@ const Navbar = () => {
                   </IconButton>
                 </ButtonGroup>
               ) : (
-                <ButtonGroup>
-                  <Button component={Link} to="/signin" color="secondary">
+                <ButtonGroup fullWidth>
+                  <Button
+                    variant="contained"
+                    component={Link}
+                    to="/signin"
+                    color="secondary"
+                  >
                     login
                   </Button>
-                  <Button component={Link} to="/signup" color="secondary">
+                  <Button
+                    variant="contained"
+                    component={Link}
+                    to="/signup"
+                    color="secondary"
+                  >
                     signup
                   </Button>
                 </ButtonGroup>
@@ -150,61 +169,6 @@ const Navbar = () => {
       </AppBar>
     </div>
   );
-
-  // return (
-  //   <div className={classes.root}>
-  //     <AppBar position="static" className={classes.AppBar}>
-  //       <Toolbar disableGutters>
-  //         <IconButton
-  //           edge="start"
-  //           className={classes.menuButton}
-  //           color="inherit"
-  //           aria-label="menu"
-  //           component={Link}
-  //           to="/"
-  //           onClick={(e: React.MouseEvent) => {
-  //             handleChange(e, 0);
-  //           }}
-  //         >
-  //           <Typography variant="button" className={classes.menuText}>
-  //             Tennis Scores App
-  //           </Typography>
-  //         </IconButton>
-  //         <LogoButton
-  //           disableFocusRipple
-  //           startIcon={<LogoIcon />}
-  //           className={classes.logoButtonHover}
-  //         >
-  //           <Typography variant="h6">Drooper Trivia</Typography>
-  //         </LogoButton>
-  //         {/* {User.isAuthenticated ? null : (
-  //           <>
-  //             <Tabs className={classes.tabs} value={value} onChange={handleChange}>
-  //               <Tab
-  //                 label="REGISTER"
-  //                 component={Link}
-  //                 to="/signup"
-  //                 disableRipple
-  //                 classes={{
-  //                   selected: classes.selectedTab,
-  //                 }}
-  //               />
-  //               <Tab
-  //                 label="LOGIN"
-  //                 component={Link}
-  //                 to="/signin"
-  //                 disableRipple
-  //                 classes={{
-  //                   selected: classes.selectedTab,
-  //                 }}
-  //               />
-  //             </Tabs>
-  //           </>
-  //         )} */}
-  //       </Toolbar>
-  //     </AppBar>
-  //   </div>
-  // );
 };
 
 export default Navbar;

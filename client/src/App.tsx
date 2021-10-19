@@ -8,7 +8,18 @@ import { Provider } from "react-redux";
 import SignIn from "./views/signin/index";
 import Signup from "./views/signup/index";
 import { MuiThemeProvider, createTheme, makeStyles } from "@material-ui/core/styles";
-import { pink, teal, yellow, blueGrey, red, deepOrange } from "@material-ui/core/colors";
+import {
+  yellow,
+  teal,
+  blueGrey,
+  red,
+  deepOrange,
+  brown,
+  lightBlue,
+  pink,
+  grey,
+  green,
+} from "@material-ui/core/colors";
 import unauthorized from "./views/unauthorized";
 import NotFound from "./views/404/index";
 import LiveScores from "./views/tournaments/index";
@@ -17,6 +28,9 @@ import { useAppSelector } from "./redux/hooks";
 import { LinearProgress } from "@material-ui/core";
 import { useAppDispatch } from "./redux/hooks";
 import TournamentDetail from "./views/tournamentDetail/index";
+import Home from "./views/home";
+import LiveTournaments from "./views/liveTournaments";
+import img from "./assets/t1.png";
 
 const App = () => {
   const User = useAppSelector((state) => state.User);
@@ -30,8 +44,8 @@ const App = () => {
 
   const theme = createTheme({
     palette: {
-      primary: blueGrey,
-      secondary: teal,
+      primary: teal,
+      secondary: pink,
     },
     typography: {},
   });
@@ -41,17 +55,15 @@ const App = () => {
       <MuiThemeProvider theme={theme}>
         <Router>
           <Navbar />
-          {User.loading || Tennis.loading ? (
-            <LinearProgress color="secondary" />
-          ) : (
-            <LinearProgress color="secondary" variant="determinate" value={100} />
-          )}
+          {User.loading || Tennis.loading ? <LinearProgress color="secondary" /> : null}
           <CssBaseline />
           <Switch>
-            <Route exact path="/" />
+            <Route exact path="/" component={Home} />
+
             <Route exact path="/signin" component={SignIn} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/tournaments" component={LiveScores} />
+            <Route exact path="/live" component={LiveTournaments} />
             <Route exact path="/tournaments/:Sid" component={TournamentDetail} />
             {/* <RequireAuth exact path="/livescores" component={LiveScores} /> */}
             <div
@@ -59,11 +71,11 @@ const App = () => {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                height: "30vh",
+                // height: "30vh",
               }}
             >
               <Route path="/unauthorized" component={unauthorized} />
-              <Route component={NotFound} />
+              {/* <Route path="*" component={NotFound} /> */}
             </div>
           </Switch>
         </Router>

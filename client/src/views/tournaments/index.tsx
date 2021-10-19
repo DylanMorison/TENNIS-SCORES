@@ -124,7 +124,7 @@ const LiveScores = () => {
         <>
           <Grid md={4} sm={6} xs={12} key={index} item>
             <Card variant="outlined" key={index * 100} className={classes.Card}>
-              <Link to={`tournaments/${Sid}`} style={{ textDecoration: "none"}}>
+              <Link to={`tournaments/${Sid}`} style={{ textDecoration: "none" }}>
                 <CardActionArea style={{ height: "140px" }}>
                   <CardContent>
                     <Button
@@ -145,14 +145,14 @@ const LiveScores = () => {
                 </CardActionArea>
               </Link>
               <CardActions className={classes.CardActions}>
-                <Typography
+                {/* <Typography
                   variant="body2"
                   color="textSecondary"
                   component="p"
                   style={{ marginLeft: "20px" }}
                 >
                   Sid: {Sid}
-                </Typography>
+                </Typography> */}
                 <IconButton
                   style={{ marginLeft: "auto" }}
                   disableFocusRipple

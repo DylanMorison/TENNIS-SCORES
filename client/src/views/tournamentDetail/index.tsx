@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   gridItem: {
-    height: "100vh",
+    // height: "100vh",
   },
   paper: {
     width: "90%",
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "25px",
   },
   mainBottomPaper: {
-    height: "63%",
+    // height: "63%",
     marginTop: "45px",
   },
   mainBottomPaperDiv: {
@@ -60,7 +60,6 @@ type propType = {
 
 const TournamentDetail = (props: propType) => {
   const classes = useStyles();
-
   const params: paramType = useParams();
   const Tennis = useAppSelector((state) => state.Tennis);
   const User = useAppSelector((state) => state.User);
@@ -82,11 +81,12 @@ const TournamentDetail = (props: propType) => {
 
   const title = tournament?.tournamentTitle;
   const type = tournament?.tournamentType;
+  const events = tournament?.events;
 
   return (
     <>
       <Grid container className={classes.root} justifyContent="center">
-        <Grid item xs className={classes.gridItem}>
+        {/* <Grid item xs className={classes.gridItem}>
           <Paper className={`${classes.paper} ${classes.sidePaper}`}>
             Schedule of Play
             <Divider />
@@ -97,7 +97,7 @@ const TournamentDetail = (props: propType) => {
               <ListItemText>etc...</ListItemText>
             </List>
           </Paper>
-        </Grid>
+        </Grid> */}
         <Grid item sm={8} xs={12} className={classes.gridItem}>
           <Paper className={`${classes.paper} ${classes.mainTopPaper}`}>
             <Typography variant="h5">{title}</Typography>
@@ -107,12 +107,15 @@ const TournamentDetail = (props: propType) => {
           </Paper>
           <Paper className={`${classes.paper} ${classes.mainBottomPaper}`}>
             <div className={classes.mainBottomPaperDiv}>
-              <Typography variant="body1">Score of Selected Match</Typography>
+              <Typography variant="body1">Matches Completed </Typography>
               <Divider />
+              {events!.map((event) => (
+                <Typography key={event.Eid}>{event.results.score}</Typography>
+              ))}
             </div>
           </Paper>
         </Grid>
-        <Grid item xs className={classes.gridItem}>
+        {/* <Grid item xs className={classes.gridItem}>
           <Paper className={`${classes.paper} ${classes.sidePaper}`}>
             Live Matches
             <Divider />
@@ -123,7 +126,7 @@ const TournamentDetail = (props: propType) => {
               <ListItemText>etc...</ListItemText>
             </List>
           </Paper>
-        </Grid>
+        </Grid> */}
       </Grid>
     </>
   );

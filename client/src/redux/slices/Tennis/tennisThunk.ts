@@ -2,6 +2,7 @@ import { actions } from "./tennisSlice";
 import { Dispatch } from "@reduxjs/toolkit";
 import axios, { AxiosRequestConfig } from "axios";
 import { formattedStageType } from "./tennisTypes";
+// import { tennisDataObj } from "../../../constants/index";
 
 const {
   getTennisMatchesByDateSuccess,

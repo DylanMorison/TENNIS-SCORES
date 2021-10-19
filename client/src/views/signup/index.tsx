@@ -104,7 +104,7 @@ const SignUp = () => {
           <Grid container>
             <Grid item>
               <RouterLink style={{ textDecoration: "none", color: "black" }} to="/signin">
-                Don't have an account yet? Sign Up
+                Don't have an account yet?
               </RouterLink>
             </Grid>
           </Grid>
